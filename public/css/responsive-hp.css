@@ -1,0 +1,65 @@
+/* ---------- Responsif: layar kecil (HP) ---------- */
+@media (max-width: 575.98px) {
+    /* Tombol hamburger: lebih kecil, tanpa kotak bergaris */
+    .navbar-bt .navbar-toggler { padding: .2rem .35rem; border: 0; }
+    .navbar-bt .navbar-toggler-icon { width: 1.25rem; height: 1.25rem; }
+    .navbar-bt .navbar-toggler:focus { box-shadow: 0 0 0 .15rem rgba(215, 25, 32, .25); }
+
+    /* Logo dan nama perusahaan di header */
+    .logo-badge { width: 38px; height: 34px; }
+    .navbar-brand .fs-6 { font-size: .85rem !important; }
+
+    /* Semua tombol besar (btn-lg) dikecilkan agar tidak memenuhi layar */
+    .btn-lg {
+        --bs-btn-padding-y: .5rem;
+        --bs-btn-padding-x: 1.25rem;
+        --bs-btn-font-size: .95rem;
+    }
+
+    /* Paragraf pengantar (hero) */
+    .lead { font-size: 1rem; }
+
+    /* Judul hero: bawaan display-4 ~43px di layar 320px sehingga memakan 6 baris */
+    .display-4 { font-size: 2rem; }
+
+    /* Jarak antar-bagian terlalu lega di HP: rapatkan (override utilitas Bootstrap) */
+    section.py-5 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+    section.py-5 > .container.py-3,
+    section.py-5 > .container.py-4,
+    section.py-5 > .container.py-5 { padding-top: .5rem !important; padding-bottom: .5rem !important; }
+
+    /* Teks rata kiri-kanan (justify) di layar sempit menghasilkan celah lebar antar-kata */
+    .text-justify { text-align: left; hyphens: manual; }
+
+    /* Jarak judul bagian ke isinya terlalu jauh (mb-5 = 3rem) */
+    section .container > .mb-5 { margin-bottom: 1.5rem !important; }
+
+    /* Teks putih transparan di latar merah kurang kontras: buat solid */
+    .bg-danger .text-opacity-75 { --bs-text-opacity: 1 !important; }
+
+    /* Paragraf CTA (fs-5 = 1.25rem) terlalu besar untuk HP */
+    section.bg-danger p.fs-5 { font-size: 1rem !important; }
+
+    /* Padding baris (row py-3 / py-4) menumpuk dengan padding section: hilangkan di HP */
+    section.py-5 > .row.py-3,
+    section.py-5 > .row.py-4 { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+    /* Tombol di dalam kartu: area sentuh lebih besar (btn-sm hanya ~30px tinggi) */
+    .cat-card .btn-sm { --bs-btn-padding-y: .5rem; --bs-btn-font-size: .9rem; }
+
+    /* Paragraf deskripsi besar (fs-5 = 1.25rem) di halaman detail */
+    p.fs-5 { font-size: 1.05rem !important; }
+}
+
+/* ---------- Tab detail produk (HP & tablet): daftar tab bisa digeser ---------- */
+@media (max-width: 991.98px) {
+    /* Pudar di tepi kanan sebagai petunjuk "masih ada tab lain"; spacer ::after
+       memastikan tab terakhir tetap terlihat penuh saat digeser sampai ujung */
+    .nav-tabs-bt {
+        scrollbar-width: none;
+        -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+        mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    }
+    .nav-tabs-bt::-webkit-scrollbar { display: none; }
+    .nav-tabs-bt::after { content: ''; flex: 0 0 .75rem; }
+}

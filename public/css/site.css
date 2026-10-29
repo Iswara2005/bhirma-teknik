@@ -1,0 +1,143 @@
+:root {
+    --ink: #0A0A0A;          /* hitam */
+    --slate: #1C1C1C;        /* hitam arang */
+    --accent: #D71920;       /* merah utama */
+    --accent-dark: #B0121A;  /* merah tua: teks di latar putih */
+    --accent-light: #FF4A4F; /* merah terang: teks di latar hitam */
+    --surface: #F5F5F5;      /* putih keabuan netral */
+    --line: #E4E4E4;
+    --muted: #A3A3A3;
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+body { font-family: var(--font-body); color: var(--ink); background: #fff; }
+
+/* Elemen yang memakai Montserrat */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6,
+.navbar-brand, .btn, .badge { font-family: var(--font-heading); }
+
+/* ---------- Warna & teks ---------- */
+.bg-ink { background: var(--ink) !important; }
+.bg-surface { background: var(--surface) !important; }
+.text-accent { color: var(--accent-light) !important; }
+.text-accent-dark { color: var(--accent-dark) !important; }
+.text-soft { color: #525252 !important; }
+.text-justify { text-align: justify; hyphens: auto; }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-dark); }
+
+/* ---------- Tombol ---------- */
+.btn-dark { background: var(--ink); border-color: var(--ink); }
+.btn-dark:hover { background: #fff; border-color: #fff; color: var(--ink); }
+
+/* ---------- Navbar ---------- */
+.navbar-bt { background: #fff; border-bottom: 3px solid var(--accent); box-shadow: 0 2px 12px rgba(0, 0, 0, .08); }
+.navbar-bt .nav-link { color: var(--ink); font-weight: 600; font-size: .9rem; border-bottom: 2px solid transparent; }
+.navbar-bt .nav-link:hover { color: var(--accent-dark); }
+.navbar-bt .nav-link.active { border-bottom-color: var(--accent); }
+.navbar-bt .text-secondary { color: #525252 !important; }
+
+.logo-badge {
+    display: flex; align-items: center; justify-content: center;
+    width: 48px; height: 42px; padding: 3px;
+    background: #fff; border: 1px solid var(--line); border-radius: .6rem;
+}
+.logo-badge img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* ---------- Kartu ---------- */
+.card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.card-hover:hover { transform: translateY(-6px); box-shadow: 0 1rem 2rem rgba(0, 0, 0, .15) !important; border-color: var(--ink) !important; }
+
+.cat-card { height: 100%; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--ink); border-radius: 1rem; transition: .25s; }
+.cat-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 28px rgba(0, 0, 0, .12); }
+
+.thumb { position: relative; height: 180px; background: linear-gradient(135deg, var(--slate), var(--ink)); }
+.thumb .badge-num { position: absolute; top: .75rem; right: .75rem; padding: .3rem .7rem; background: var(--accent); color: #fff; font-weight: 800; font-size: .75rem; border-radius: 50rem; }
+
+.link-hover-white { transition: background-color .2s, color .2s; }
+.link-hover-white:hover { background: #fff !important; color: var(--accent-dark) !important; }
+
+/* ---------- Footer ---------- */
+.footer-bt { background: var(--ink); color: var(--muted); border-top: 4px solid var(--accent); }
+.footer-bt a { color: var(--muted); text-decoration: none; }
+.footer-bt a:hover { color: #fff; }
+.footer-bt .text-secondary { color: var(--muted) !important; }
+
+/* ---------- Form, fokus, tab, akordeon ---------- */
+.form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 .2rem rgba(215, 25, 32, .2); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.nav-tabs-bt {
+    --bs-nav-link-color: #212529;
+    --bs-nav-link-hover-color: var(--accent);
+    --bs-nav-underline-link-active-color: var(--accent);
+    --bs-nav-underline-gap: 1.75rem;
+}
+
+.accordion-button:not(.collapsed) { color: var(--accent-dark); background: #fff; box-shadow: none; }
+.accordion-button:focus { border-color: var(--accent); box-shadow: 0 0 0 .2rem rgba(215, 25, 32, .2); }
+
+/* ---------- Lightbox foto (public/js/lightbox.js) ---------- */
+.lightbox-trigger { cursor: zoom-in; }
+.lightbox-hint { position: absolute; right: .75rem; bottom: .75rem; padding: .35rem .7rem; background: rgba(0,0,0,.65); color: #fff; font-size: .8rem; font-weight: 600; pointer-events: none; transition: background .15s; }
+.lightbox-trigger:hover .lightbox-hint, .lightbox-trigger:focus-visible .lightbox-hint { background: var(--accent); }
+
+body.lightbox-open { overflow: hidden; }
+.lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; flex-direction: column; background: rgba(0,0,0,.95); color: #fff; }
+.lightbox[hidden], .lightbox [hidden] { display: none !important; }
+.lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 56px; padding: .25rem .75rem .25rem 1rem; }
+.lightbox-caption { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-heading); font-weight: 600; }
+.lightbox-tools { display: flex; align-items: center; gap: .125rem; flex-shrink: 0; }
+.lightbox-tools button { width: 44px; height: 44px; border: 0; background: transparent; color: #fff; font-size: 1.15rem; }
+.lightbox-tools button:hover, .lightbox-tools button:focus-visible { background: rgba(255,255,255,.18); outline: 0; }
+.lightbox-pct { min-width: 3.5rem; text-align: center; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.lightbox-stage { position: relative; flex: 1; overflow: hidden; touch-action: none; user-select: none; }
+.lightbox-stage.is-zoomed { cursor: grab; }
+.lightbox-stage.is-zoomed:active { cursor: grabbing; }
+/* Jangan beri will-change: transform di sini; itu membuat foto di-zoom dari gambar yang sudah diraster (jadi buram). */
+.lightbox-img { position: absolute; top: 0; left: 0; max-width: none; transform-origin: 0 0; opacity: 0; transition: opacity .2s; }
+.lightbox-spinner { position: absolute; top: 50%; left: 50%; margin: -1rem 0 0 -1rem; }
+.lightbox-nav {
+    display: none; position: absolute; top: 50%; z-index: 2;
+    width: 48px; height: 48px; margin-top: -24px; border: 0; border-radius: 50%;
+    background: rgba(255, 255, 255, .14); color: #fff; font-size: 1.25rem;
+    backdrop-filter: blur(6px); transition: background-color .15s;
+}
+.lightbox-nav:hover, .lightbox-nav:focus-visible { background: var(--accent); outline: 0; }
+.lightbox-prev { left: .75rem; }
+.lightbox-next { right: .75rem; }
+.lightbox.has-nav .lightbox-nav { display: flex; align-items: center; justify-content: center; }
+@media (max-width: 575.98px) { .lightbox-nav { width: 40px; height: 40px; margin-top: -20px; } }
+
+/* ---------- Banner halaman (Tentang Kami, Bidang Usaha, Kontak, Galeri) ---------- */
+.page-hero {
+    background: var(--ink); text-align: center;
+    padding: clamp(4.5rem, 11vw, 8rem) 1rem clamp(3rem, 7vw, 5rem);
+}
+.page-hero .eyebrow {
+    color: var(--accent-light) !important;
+    font-size: .85rem; letter-spacing: .16em;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, .75);
+}
+.page-hero-title {
+    margin: .75rem auto 0; max-width: 18em;
+    font: 800 clamp(2.4rem, 7vw, 4.75rem)/1.05 var(--font-heading);
+    letter-spacing: -.035em; color: #fff; text-wrap: balance;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
+}
+.page-hero-title span {
+    display: block; color: #D4D4D4;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, .55);
+}
+.page-hero-lead {
+    max-width: 36rem; margin: 1.25rem auto 0;
+    color: rgba(255, 255, 255, .88);
+    font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.5;
+}
+/* Kartu kontak cepat: naik sedikit menimpa banner di atasnya */
+.contact-cards { margin-top: clamp(-3rem, -4vw, -1.5rem); z-index: 3; }
+/* Pembantu kecil pengganti style="" di view */
+.brand-city { font-size: .72rem; }
+.about-photo { min-height: 350px; }

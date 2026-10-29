@@ -1,0 +1,108 @@
+/* Galeri bergaya Apple, memakai palet situs (variabel dari site.css) */
+:root {
+    --nav-h: 70px;    /* tinggi navbar; diperbarui otomatis oleh gallery.js */
+    --g-radius: 0;    /* lengkung sudut foto & caption. 0 = kotak. Contoh melengkung: .75rem */
+}
+
+/* ---------- Filter kategori (segmented control) ---------- */
+.gallery-filter {
+    position: sticky; top: var(--nav-h); z-index: 20;
+    padding: .75rem 1rem; border-bottom: 1px solid transparent;
+    background: rgba(255, 255, 255, .82);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: border-color .25s, box-shadow .25s;
+}
+.gallery-filter[hidden] { display: none; }
+.gallery-filter.is-stuck { border-bottom-color: var(--line); box-shadow: 0 6px 20px rgba(0, 0, 0, .04); }
+
+.gallery-filter-inner {
+    display: flex; gap: .25rem; width: max-content; max-width: 100%;
+    margin: 0 auto; padding: .25rem; border-radius: 50rem;
+    background: #EDEDED; overflow-x: auto; scrollbar-width: none;
+}
+.gallery-filter-inner::-webkit-scrollbar { display: none; }
+
+.gallery-chip {
+    flex: 0 0 auto; display: inline-flex; align-items: center; gap: .5rem;
+    padding: .55rem 1.15rem; border: 0; border-radius: 50rem;
+    background: transparent; color: #525252; cursor: pointer;
+    font: 600 .875rem/1 var(--font-heading);
+    transition: background-color .25s, color .25s, box-shadow .25s;
+}
+.gallery-chip span { color: var(--muted); font: 700 .72rem/1 var(--font-body); transition: color .25s; }
+.gallery-chip:hover { color: var(--ink); }
+.gallery-chip.is-active { background: var(--ink); color: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); }
+.gallery-chip.is-active span { color: var(--accent-light); }
+
+/* ---------- Bagian grid ---------- */
+.gallery-section { background: var(--surface); padding: 1.5rem 0 clamp(4rem, 8vw, 6rem); }
+
+/* Foto diisi dari kiri ke kanan, lalu turun ke baris berikutnya.
+   Lebar foto utama (span kolom) diatur gallery.js. */
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 170px; gap: .75rem;
+}
+@media (min-width: 768px)  { .gallery-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; gap: 1rem; } }
+@media (min-width: 1200px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 270px; gap: 1.25rem; } }
+
+/* ---------- Kartu foto (kotak) ---------- */
+.gallery-tile {
+    position: relative; display: block; overflow: hidden; isolation: isolate;
+    border-radius: var(--g-radius); cursor: zoom-in;
+    background: linear-gradient(135deg, var(--slate), var(--ink));
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+    transition: box-shadow .4s ease;
+}
+.gallery-tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.gallery-tile img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1.1s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* ---------- Caption (kotak kaca di pojok kiri bawah) ---------- */
+.gallery-cap {
+    position: absolute; left: .75rem; bottom: .75rem; z-index: 2;
+    max-width: calc(100% - 1.5rem);
+    display: flex; flex-direction: column; gap: .25rem;
+    padding: .55rem .85rem; border-radius: var(--g-radius); color: var(--ink);
+    background: rgba(255, 255, 255, .82);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+    transition: opacity .35s, transform .45s cubic-bezier(.16, 1, .3, 1);
+}
+.gallery-cap small { color: var(--accent-dark); font: 700 .62rem/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
+.gallery-cap strong {
+    font: 600 .82rem/1.25 var(--font-heading);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+@media (min-width: 768px) {
+    .gallery-cap { left: 1rem; bottom: 1rem; padding: .7rem 1rem; }
+    .gallery-cap strong { font-size: .95rem; }
+}
+
+/* Komputer dengan kursor: efek saat disorot. HP: caption selalu terlihat. */
+@media (hover: hover) and (pointer: fine) {
+    .gallery-cap { opacity: 0; transform: translateY(10px); }
+    .gallery-tile:hover, .gallery-tile:focus-visible { box-shadow: 0 24px 48px rgba(0, 0, 0, .18); }
+    .gallery-tile:hover img, .gallery-tile:focus-visible img { transform: scale(1.05); }
+    .gallery-tile:hover .gallery-cap, .gallery-tile:focus-visible .gallery-cap { opacity: 1; transform: none; }
+}
+
+/* ---------- Animasi muncul saat di-scroll (diaktifkan gallery.js) ---------- */
+.gallery-grid.is-ready .gallery-tile {
+    transition:
+        opacity .9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms),
+        transform .9s cubic-bezier(.16, 1, .3, 1) var(--d, 0ms),
+        box-shadow .4s ease;
+}
+.gallery-grid.is-ready .gallery-tile:not(.is-in) { opacity: 0; transform: translateY(40px) scale(.97); }
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery-tile, .gallery-tile img, .gallery-cap { transition: none; }
+    .gallery-tile:hover img { transform: none; }
+    .gallery-grid.is-ready .gallery-tile { transition: none; }
+    .gallery-grid.is-ready .gallery-tile:not(.is-in) { opacity: 1; transform: none; }
+}
